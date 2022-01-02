@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('layouts/header') %> 
+    <body>
+        <%- include('layouts/navbar') %> 
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url('/assets/img/contact-bg.jpg')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="page-heading">
+                            <h1>My Post</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Main Content-->
+        <main class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row">
+                   <% if (locals.blogposts.length > 0) { %> 
+                    <% for(let i = 0; i < blogposts.length; i++) { %> 
+                        <div class="col-md-3">
+                            <div class="my-5">
+                                <div class="post-preview">
+                                    <img src="<%= blogposts[i].image %>" width="100%" alt="">
+                                    <a href="/post/<%= blogposts[i]._id %> ">
+                                        <h2 class="post-title">
+                                            <%= blogposts[i].title %> 
+                                        </h2>
+                                        <h3 class="post-subtitle">
+                                            <%- blogposts[i].body %>
+                                        </h3>
+                                    </a>
+                                    <p class="post-meta">
+                                        Posted by
+                                        <a href="#"><%= blogposts[i].userid.username %></a>
+                                        on <%= blogposts[i].datePosted.toDateString() %> 
+                                    </p>
+                                    <a href="edit/<%= blogposts[i]._id %>" class="btn btn-primary text-white">Edit</a>
+                                    <a href="delete/<%= blogposts[i]._id %>" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-danger text-white">Delete</a>
+                                </div>
+                            </div>
+                        </div>
+                    <% } %> 
+                   <% } else { %> 
+                        <p class="alert alert-warning">คุณยังไม่มีโพสต์</p>
+                   <% } %> 
+                </div>
+            </div>
+        </main>
+        <%- include('layouts/footer') %> 
+        <%- include('layouts/scripts') %> 
+    </body>
+</html>
